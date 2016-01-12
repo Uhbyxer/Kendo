@@ -1,22 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-  
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
-<link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
-
-<script type="text/javascript" src="http://cdn.kendostatic.com/2012.2.710/js/kendo.all.min.js"></script>
-<style type="text/css">
-</style>
-
-  <title>Kendo UI DropDownList with TreeView</title>
-
-  
-    
-<script>
+<script type='text/javascript'>//<![CDATA[
 $(window).load(function(){
 var dropdown = $("#dropdown").kendoDropDownList({
     dataSource: [{ text: "", value: "" }],
@@ -66,32 +48,6 @@ $(document).click(function(e) {
     }
 });
 
-});
+});//]]> 
 
 </script>
-
-  
-</head>
-
-<body>
-  <ul id="treeview">
-      <li data-expanded="true"> <a href="yahoo.com"> Yahoo </a>
-        <ul>
-            <li> <a href="google.com">  Google </a> </li>
-            <li>Item 1.2</li>
-        </ul>
-    </li>
-    <li data-expanded="true">Item 2
-        <ul>
-            <li>Item 2.1</li>
-            <li>Item 2.2</li>
-        </ul>
-    </li>
-</ul>
-
-<input id="dropdown"></input>
-
-  
-</body>
-
-</html>
