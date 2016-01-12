@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
+<link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
+
+<script type="text/javascript" src="http://cdn.kendostatic.com/2012.2.710/js/kendo.all.min.js"></script>
+<style type="text/css">
+</style>
+
+  <title>Kendo UI DropDownList with TreeView</title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+$(window).load(function(){
+var dropdown = $("#dropdown").kendoDropDownList({
+    dataSource: [{ text: "", value: "" }],
+    dataTextField: "text",
+    dataValueField: "value",
+    open: function (e) {
+        // If the treeview is not visible, then make it visible.
+        if (!$treeviewRootElem.hasClass("k-custom-visible")) {
+            $treeviewRootElem.slideToggle('fast', function() {
+                dropdown.close();
+                $treeviewRootElem.addClass("k-custom-visible");
+            });
+        }
+    }
+}).data("kendoDropDownList");
+var $dropdownRootElem = $(dropdown.element).closest("span.k-dropdown");
+
+var treeview = $("#treeview").kendoTreeView({
+    select: function (e) {
+        // When a node is selected, display the text for the node in the dropdown and hide the treeview.
+        $dropdownRootElem.find("span.k-input").text($(e.node).children("div").text());
+        $treeviewRootElem.slideToggle('fast', function() {
+            $treeviewRootElem.removeClass("k-custom-visible");
+        });
+    }
+}).data("kendoTreeView");
+var $treeviewRootElem = $(treeview.element).closest("div.k-treeview");
+
+// Hide the treeview.
+$treeviewRootElem
+    .width($dropdownRootElem.width())
+    .css({ "border":"1px solid grey", "display": "none", "position": "absolute" });
+
+// Position the treeview so that it is below the dropdown.
+$treeviewRootElem
+    .css({ "top": $dropdownRootElem.position().top + $dropdownRootElem.height(), "left": $dropdownRootElem.position().left });
+
+$(document).click(function(e) {
+    // Ignore clicks on the treetriew.
+    if ($(e.target).closest("div.k-treeview").length == 0) {
+        // If visible, then close the treeview.
+        if ($treeviewRootElem.hasClass("k-custom-visible")) {
+            $treeviewRootElem.slideToggle('fast', function() {
+                $treeviewRootElem.removeClass("k-custom-visible");
+            });
+        }
+    }
+});
+
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <ul id="treeview">
+      <li data-expanded="true"> <a href="yahoo.com"> Yahoo </a>
+        <ul>
+            <li> <a href="google.com">  Google </a> </li>
+            <li>Item 1.2</li>
+        </ul>
+    </li>
+    <li data-expanded="true">Item 2
+        <ul>
+            <li>Item 2.1</li>
+            <li>Item 2.2</li>
+        </ul>
+    </li>
+</ul>
+
+<input id="dropdown"></input>
+
+  
+</body>
+
+</html>
